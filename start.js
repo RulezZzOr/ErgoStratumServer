@@ -65,8 +65,8 @@ var pool = Stratum.createPool({
     "banning": {
         "enabled": true,
         "time": 600, //How many seconds to ban worker for
-        "invalidPercent": 50, //What percent of invalid shares triggers ban
-        "checkThreshold": 500, //Check invalid percent when this many shares have been submitted
+        "invalidPercent": 70, //What percent of invalid shares triggers ban
+        "checkThreshold": 2000, //Check invalid percent when this many shares have been submitted
         "purgeInterval": 300 //Every this many seconds clear out the list of old bans
     },
 
@@ -74,20 +74,20 @@ var pool = Stratum.createPool({
        be configured to use its own pool difficulty and variable difficulty settings. varDiff is
        optional and will only be used for the ports you configure it for. */
     "ports": {
-        "3256": { //A port for your miners to connect to
-            "diff": 256,
+        "3256": { //A port for your miners to connect to (vardiff lane)
+            "diff": 4000000,
             "multiplyDifficulty": true,
             "varDiff": {
-                "startDiff": 256,
-                "minDiff": 64,
-                "maxDiff": 262144,
+                "startDiff": 4000000,
+                "minDiff": 2000000,
+                "maxDiff": 64000000,
                 "targetTime": 15,
                 "retargetTime": 60,
-                "variancePercent": 30
+                "variancePercent": 25
             }
         },
-        "3257": { //Another port for your miners to connect to, this port does not use varDiff
-            "diff": 512,
+        "3257": { //Static difficulty lane for older miners
+            "diff": 4000000,
             "multiplyDifficulty": true
         }
     },
