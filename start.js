@@ -76,7 +76,7 @@ var pool = Stratum.createPool({
     "ports": {
         "3256": { //A port for your miners to connect to (vardiff lane)
             "diff": 4000000,
-            "multiplyDifficulty": true,
+            "multiplyDifficulty": false,
             "varDiff": {
                 "startDiff": 4000000,
                 "minDiff": 2000000,
@@ -88,7 +88,7 @@ var pool = Stratum.createPool({
         },
         "3257": { //Static difficulty lane for older miners
             "diff": 4000000,
-            "multiplyDifficulty": true
+            "multiplyDifficulty": false
         }
     },
 
