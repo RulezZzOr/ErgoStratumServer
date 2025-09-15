@@ -75,27 +75,24 @@ var pool = Stratum.createPool({
        optional and will only be used for the ports you configure it for. */
     "ports": {
         "3256": { //A port for your miners to connect to
-            "diff": 1, //the pool difficulty for this port
-            /*
-            * use this parameter to multiply difficulty to b for each request.
-            * some miner like NBMiner does not support difficulty method of stratum.
-            * if you want your pool work with these miners set this parameters.
-            *
-            * */
-            "multiplyDifficulty": false,
-            /* Variable difficulty is a feature that will automatically adjust difficulty for
-               individual miners based on their hashrate in order to lower networking overhead */
+            "diff": 256, //baseline pool difficulty for this port
+            "multiplyDifficulty": true,
+            /* EMA-based VarDiff accepts these options */
             "varDiff": {
-                "startDiff": 1, //Explicitly set the starting difficulty for varDiff
-                "minDiff": 1, //Minimum difficulty
-                "maxDiff": 16431986528747520, //Network difficulty will be used if it is lower than this
-                "targetTime": 15, //Try to get 1 share per this many seconds
-                "retargetTime": 10, //Check to see if we should retarget every this many seconds
-                "variancePercent": 30 //Allow time to very this % from target without retargeting
+                "startDiff": 256,
+                "minDiff": 64,
+                "maxDiff": 65536,
+                "targetTime": 15,
+                "retargetShares": 30,
+                "retargetInterval": 90,
+                "maxStepUp": 1.5,
+                "maxStepDown": 0.6,
+                "hysteresis": 0.05
             }
         },
         "3257": { //Another port for your miners to connect to, this port does not use varDiff
-            "diff": 256 //The pool difficulty
+            "diff": 256,
+            "multiplyDifficulty": true
         }
     },
 
