@@ -75,23 +75,19 @@ var pool = Stratum.createPool({
        optional and will only be used for the ports you configure it for. */
     "ports": {
         "3256": { //A port for your miners to connect to
-            "diff": 256, //baseline pool difficulty for this port
+            "diff": 256,
             "multiplyDifficulty": true,
-            /* EMA-based VarDiff accepts these options */
             "varDiff": {
                 "startDiff": 256,
                 "minDiff": 64,
-                "maxDiff": 65536,
+                "maxDiff": 262144,
                 "targetTime": 15,
-                "retargetShares": 30,
-                "retargetInterval": 90,
-                "maxStepUp": 1.5,
-                "maxStepDown": 0.6,
-                "hysteresis": 0.05
+                "retargetTime": 60,
+                "variancePercent": 30
             }
         },
         "3257": { //Another port for your miners to connect to, this port does not use varDiff
-            "diff": 256,
+            "diff": 512,
             "multiplyDifficulty": true
         }
     },
